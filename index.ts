@@ -208,16 +208,20 @@ function loadSkillFromFile(filePath: string, skillsByName: Map<string, Skill>): 
 /**
  * Load skills from known directories
  * Matches pi's skill loading order:
- * 1. ~/.codex/skills (recursive)
- * 2. ~/.claude/skills (claude format - one level)
- * 3. ${cwd}/.claude/skills (claude format - one level)
- * 4. ~/.pi/agent/skills (recursive)
- * 5. ${cwd}/.pi/skills (recursive)
+ * 1. ~/.agents/skills (recursive)
+ * 2. ${cwd}/.agents/skills (claude format - one level)
+ * 3. ~/.codex/skills (recursive)
+ * 4. ~/.claude/skills (claude format - one level)
+ * 5. ${cwd}/.claude/skills (claude format - one level)
+ * 6. ~/.pi/agent/skills (recursive)
+ * 7. ${cwd}/.pi/skills (recursive)
  */
 function loadSkills(): Skill[] {
 	const skillsByName = new Map<string, Skill>();
 	
 	const skillDirs: SkillDirConfig[] = [
+		{ dir: path.join(os.homedir(), ".agents", "skills"), format: "recursive" },
+		{ dir: path.join(process.cwd(), ".agents", "skills"), format: "claude" },
 		{ dir: path.join(os.homedir(), ".codex", "skills"), format: "recursive" },
 		{ dir: path.join(os.homedir(), ".claude", "skills"), format: "claude" },
 		{ dir: path.join(process.cwd(), ".claude", "skills"), format: "claude" },
