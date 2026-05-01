@@ -562,9 +562,8 @@ export default function skillPaletteExtension(pi: ExtensionAPI): void {
 		
 		const container = new Container();
 		
-		// Header with file icon and skill name(s) (like read tool)
+		// Header with skill name(s) (like read tool)
 		const header = new Text(
-			theme.fg("accent", "◆ ") + 
 			theme.fg("customMessageLabel", theme.bold(title)),
 			1, 0
 		);
@@ -626,8 +625,8 @@ export default function skillPaletteExtension(pi: ExtensionAPI): void {
 				}
 
 				const names = state.queuedSkills.map((skill) => skill.name).join(", ");
-				ctx.ui.setStatus("skill", `📚 ${state.queuedSkills.length}`);
-				ctx.ui.setWidget("skill", [`\x1b[2m📚 Skills: \x1b[0m\x1b[36m${names}\x1b[0m\x1b[2m — will be applied to next message\x1b[0m`]);
+				// ctx.ui.setStatus("skill", `Skills ${state.queuedSkills.length}`);
+				ctx.ui.setWidget("skill", [`\x1b[2mSkills: \x1b[0m\x1b[36m${names}\x1b[0m\x1b[2m — will be applied to next message\x1b[0m`]);
 				ctx.ui.notify(`Skills queued: ${names}`, "info");
 			}
 		},
